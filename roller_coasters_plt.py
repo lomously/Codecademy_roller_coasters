@@ -17,45 +17,41 @@ df_steel = pd.read_csv(r'C:\Coding\Codecademy_Projects\roller_coaster_starting\G
 
 # write function to plot rankings over time for 1 roller coaster here:
 
-el_toro_ranking = df_wood[(df_wood['Name']== 'El Toro') & (df_wood['Park']=='Six Flags Great Adventure')]
-#print(el_toro_ranking)
-
-plt.plot(el_toro_ranking['Year of Rank'], el_toro_ranking['Rank'], linewidth=4, color='purple')
-
-ax = plt.subplot(1,1,1)
-ax.set_yticks(range(1,4))
-ax.set_xticks(el_toro_ranking['Year of Rank'])
-ax.set_facecolor(color='#ffdad4')
-ax.invert_yaxis()
-
-plt.xlabel('Year')
-plt.ylabel('Rank')
-plt.title('Ranking of El Toro at Six Flags Great Adventure 2013-2018')
-plt.legend(['El Toro'])
-#.show()
-
+def coaster_plotter(df, coaster, park):
+   coaster_df = df[(df['Name'] == coaster) & (df['Park'] == park)]
+   plt.plot(coaster_df['Year of Rank'], coaster_df['Rank'], linewidth=4, color='purple')
+   ax = plt.subplot(1,1,1)
+   ax.set_yticks(range(1,4))
+   ax.set_xticks(range(2013, 2019))
+   ax.set_facecolor(color='#ffdad4')
+   ax.invert_yaxis()
+   plt.xlabel('Year')
+   plt.ylabel('Rank')
+   plt.title('Ranking of {0} at {1} 2013-2018'.format(coaster, park))
+   plt.legend([coaster])
+   
+coaster_plotter(df_wood, 'El Toro', 'Six Flags Great Adventure')
+plt.show()
 plt.clf()
 
 # write function to plot rankings over time for 2 roller coasters here:
 
-el_toro_ranking = df_wood[(df_wood['Name'] == 'El Toro') & (df_wood['Park'] == 'Six Flags Great Adventure')]
-print(el_toro_ranking)
-boulder_dash_ranking = df_wood[(df_wood['Name'] == 'Boulder Dash') & (df_wood['Park'] == 'Lake Compounce')]
-print(boulder_dash_ranking)
+def two_coasters(df, coaster1, coaster2, park1, park2):
+    coaster_one = df[(df['Name'] == coaster1) & (df['Park'] == park1)]
+    coaster_two = df[(df['Name'] == coaster2) & (df['Park'] == park2)]
+    plt.plot(coaster_one['Year of Rank'], coaster_one['Rank'], linewidth=4, color='purple')
+    plt.plot(coaster_two['Year of Rank'], coaster_two['Rank'], linewidth=4, color='red')
+    ax = plt.subplot(1,1,1)
+    ax.set_yticks(range(1,5))
+    ax.set_xticks(range(2013, 2019))
+    ax.set_facecolor(color='lightpink')
+    ax.invert_yaxis()
+    plt.xlabel('Year')
+    plt.ylabel('Rank')
+    plt.title('Ranking of {0} vs {1} 2013-2018'.format(coaster1, coaster2))
+    plt.legend([coaster1, coaster2])
 
-
-plt.plot(el_toro_ranking['Year of Rank'], el_toro_ranking['Rank'], linewidth=4, color='purple')
-plt.plot(boulder_dash_ranking['Year of Rank'], boulder_dash_ranking['Rank'], linewidth=4, color='red')
-ax = plt.subplot(1,1,1)
-ax.set_yticks(range(1,5))
-ax.set_xticks(el_toro_ranking['Year of Rank'])
-ax.set_facecolor(color='#ffdad4')
-ax.invert_yaxis()
-
-plt.xlabel('Year')
-plt.ylabel('Rank')
-plt.title('Ranking of El Toro vs Boulder Dash 2013-2018')
-plt.legend(['El Toro', 'Boulder Dash'])
+two_coasters(df_wood, 'El Toro', 'Boulder Dash', 'Six Flags Great Adventure', 'Lake Compounce')
 #plt.show()
 
 
